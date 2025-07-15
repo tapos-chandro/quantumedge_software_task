@@ -8,6 +8,7 @@
 
   --color-primary-color: #05AF2B;
   --color-bg-color: #071400;
+  --color-border-color: #CCCCCC;
   --color-avocado-200: oklch(0.98 0.04 113.22);
   --color-avocado-300: oklch(0.94 0.11 115.03);
   --color-avocado-400: oklch(0.92 0.19 114.08);
@@ -15,6 +16,7 @@
   --color-avocado-600: oklch(0.53 0.12 118.34);
   --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+
   /* ... */
 }
 
