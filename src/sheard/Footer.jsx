@@ -124,6 +124,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+            <p className="text-center py-8 border-t-[1px] border-[#cccccc20]">© QuantumEdge Software INC. 2025. All rights reserved.</p>
             </footer>
         </div>
     );
