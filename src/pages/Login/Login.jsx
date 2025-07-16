@@ -1,30 +1,35 @@
+import { useState } from "react";
+import { BiHide, BiSolidShow } from "react-icons/bi";
 import { FaEnvelope, FaLock, FaFacebookF, FaTimes, FaApple } from "react-icons/fa";
-import { FaXTwitter} from "react-icons/fa6";
+import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router";
 
 
 
 const Login = () => {
+
+     const [toggleTwo, setToggleTwo] = useState(false)
+
     return (
         <div className="relative">
             <img src="../../../src/assets/Ellipse 4.png" className="absolute -top-10" alt="" />
             <div className="py-32 flex items-center justify-center bg-gradient-to-tr from-white to-green-50 p-4">
-                <div className="bg-bg-color rounded-2xl shadow-lg overflow-hidden max-w-5xl w-full flex flex-col md:flex-row ">
+                <div className="bg-bg-color rounded-2xl z-20 shadow-lg overflow-hidden max-w-5xl w-full flex flex-col md:flex-row ">
 
                     {/* Left - Form */}
                     <div className="w-full md:w-1/2 p-8 text-white relative text-center">
                         <h2 className="text-2xl font-bold mb-1">Open your account</h2>
                         <p className="text-sm mb-6 text-gray-400">
-                             Have an new account?
+                            Have an new account?
                             <Link to={"/signup"} className="text-green-400 hover:underline">Sign up</Link>
 
                         </p>
-                        <img src="../../../src/assets/Ellipse 21.png" className="absolute -right-52 top-0" alt="" />
+                        <img src="../../../src/assets/Ellipse 21.png" className="absolute -right-52 -z-10 top-0" alt="" />
 
                         {/* Form */}
                         <form className="space-y-7">
                             <div className="relative">
-                                <FaEnvelope className="absolute left-3 top-3 text-green-400" />
+                                <FaEnvelope className="absolute left-3 top-3 text-[#888888]" />
                                 <input
                                     type="email"
                                     placeholder="Email Address"
@@ -33,13 +38,19 @@ const Login = () => {
                             </div>
 
                             <div className="relative">
-                                <FaLock className="absolute left-3 top-3 text-green-400" />
+                                <FaLock className="absolute left-3 top-3 text-[#888888]" />
+                                {
+                                    toggleTwo === true ? <BiSolidShow onClick={() => setToggleTwo(!toggleTwo)} className="absolute right-8 top-3 text-[#888888] hover:cursor-pointer text-xl" /> : <BiHide onClick={() => setToggleTwo(!toggleTwo)} className="absolute right-8 top-3 text-[#888888] hover:cursor-pointer text-xl" />
+                                }
                                 <input
-                                    type="password"
+                                    type={`${toggleTwo === true ? 'text' : "password"}`}
                                     placeholder="Password"
+                                    required
+                                    name="password"
                                     className="w-full pl-10 pr-4 py-2 rounded-full border border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
                                 />
                             </div>
+
 
                             <button
                                 type="submit"

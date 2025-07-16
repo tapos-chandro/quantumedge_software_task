@@ -1,56 +1,150 @@
-import { FaEnvelope, FaLock, FaFacebookF, FaTwitter, FaTimes, FaApple } from "react-icons/fa";
+import axios from "axios";
+import { FaEnvelope, FaLock, FaFacebookF, FaUser, FaPen, FaTimes, FaApple } from "react-icons/fa";
+import { BiHide, BiSolidShow } from "react-icons/bi";
 import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useState } from "react";
+import Swal from 'sweetalert2'
 
 const SignUp = () => {
+
+    const [toggleOne, setToggleOne] = useState(false)
+    const [toggleTwo, setToggleTwo] = useState(false)
+    const [error, setError] = useState({})
+
+    const navigate = useNavigate()
+
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const first_name = form.firstName.value;
+        const username = form.userName.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+
+
+        console.log(email, password)
+
+        const formData = { email, password, confirmPassword, username, first_name };
+
+        try {
+            const res = await axios.post("http://localhost:5000/api/signup", formData);
+
+
+            console.log(res)
+
+
+
+            if (res.data.status == true) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${res.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/login')
+            } else {
+                setError(res.data.error)
+            }
+
+        } catch (error) {
+            console.error("Signup failed:", error.response?.data || error.message);
+
+        }
+    };
+
+
     return (
         <div className="relative">
             <img src="../../../src/assets/Ellipse 4.png" className="absolute -top-10" alt="" />
             <div className="py-32 flex items-center justify-center bg-gradient-to-tr from-white to-green-50 p-4">
-                <div className="bg-bg-color rounded-2xl shadow-lg overflow-hidden max-w-5xl w-full flex flex-col md:flex-row">
+                <div className="bg-bg-color z-20 rounded-2xl shadow-lg overflow-hidden max-w-5xl w-full flex flex-col md:flex-row">
 
                     {/* Left - Form */}
-                    <div className="w-full md:w-1/2 p-8 text-white relative text-center">
+                    <div className="w-full md:w-1/2 p-8 text-white relative text-center ">
                         <h2 className="text-2xl font-bold mb-1">Open your account</h2>
-                        <p className="text-sm mb-6 text-gray-400">
+                        <p className="text-sm mb-6 text-gray-400 ">
                             Already have an account?
-                            <Link to={"/login"} className="text-green-400 hover:underline">Sign in</Link>
+                            <Link to={"/login"} className="text-green-400 hover:underline z-50">Sign in</Link>
 
                         </p>
 
-                        <img src="../../../src/assets/Ellipse 21.png" className="absolute -right-52 top-0" alt="" />
+                        <div className="-z-10">
+                            <img src="../../../src/assets/Ellipse 21.png" className="absolute  -right-52 top-0 -z-10" alt="" />
+                        </div>
                         {/* Form */}
-                        <form className="space-y-7">
+                        <form className="space-y-7 z-50" onSubmit={handleSignup}>
                             <div className="relative">
-                                <FaEnvelope className="absolute left-3 top-3 text-green-400" />
+                                <FaPen className="absolute left-3 top-3 text-[#888888]" />
                                 <input
-                                    type="email"
-                                    placeholder="Email Address"
+                                    type="text"
+                                    placeholder="Email First Name"
+                                    name="firstName"
+                                    required
                                     className="w-full pl-10 pr-4 py-2 rounded-full border  border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
                                 />
                             </div>
+                            <div className="relative">
+                                <FaUser className="absolute left-3 top-3 text-[#888888]" />
+                                <input
+                                    type="text"
+                                    placeholder="Email User Name"
+                                    required
+                                    name="userName"
+                                    className="w-full pl-10 pr-4 py-2 rounded-full border  border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
+                                />
+                                <p className="text-red-400">{error.username}</p>
+                            </div>
+                            <div className="relative">
+                                <FaEnvelope className="absolute left-3 top-3 text-[#888888]" />
+                                <input
+                                    type="email"
+                                    placeholder="Email Address"
+                                    required
+                                    name="email"
+                                    className="w-full pl-10 pr-4 py-2 rounded-full border  border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
+                                />
+                                <p className="text-red-400">{error.email}</p>
+                            </div>
+                            
 
                             <div className="relative">
-                                <FaLock className="absolute left-3 top-3 text-green-400" />
+                                <FaLock className="absolute left-3 top-3 text-[#888888]" />
+                                {
+                                    toggleTwo === true ? <BiSolidShow onClick={() => setToggleTwo(!toggleTwo)} className="absolute right-8 top-3 text-[#888888] hover:cursor-pointer text-xl" /> : <BiHide onClick={() => setToggleTwo(!toggleTwo)} className="absolute right-8 top-3 text-[#888888] hover:cursor-pointer text-xl" />
+                                }
                                 <input
-                                    type="password"
+                                    type={`${toggleTwo === true ? 'text' : "password"}`}
                                     placeholder="Password"
+                                    required
+                                    name="password"
                                     className="w-full pl-10 pr-4 py-2 rounded-full border border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
                                 />
                             </div>
 
                             <div className="relative">
-                                <FaLock className="absolute left-3 top-3 text-green-400" />
+                                <FaLock className="absolute left-3 top-3 text-[#888888]" />
+                                {
+                                    toggleOne === true ? <BiSolidShow onClick={() => setToggleOne(!toggleOne)} className="absolute right-8 top-3 text-[#888888] hover:cursor-pointer text-xl" /> : <BiHide onClick={() => setToggleOne(!toggleOne)} className="absolute right-8 top-3 text-[#888888] hover:cursor-pointer text-xl" />
+                                }
+
                                 <input
-                                    type="password"
+                                    type={`${toggleOne === true ? 'text' : 'password'}`}
                                     placeholder="Confirm Password"
+                                    required
+
+                                    name="confirmPassword"
                                     className="w-full pl-10 pr-4 py-2 rounded-full border border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
                                 />
                             </div>
 
                             <button
                                 type="submit"
-                                className="w-full bg-primary-color font-semibold hover:bg-green-600 transition text-white py-2 rounded-full hover:cursor-pointer"
+                                className="w-full  bg-primary-color font-semibold hover:bg-green-600 transition text-white py-2 rounded-full hover:cursor-pointer"
                             >
                                 Create Account
                             </button>
