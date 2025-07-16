@@ -1,14 +1,55 @@
+import axios from "axios";
 import { useState } from "react";
 import { BiHide, BiSolidShow } from "react-icons/bi";
 import { FaEnvelope, FaLock, FaFacebookF, FaTimes, FaApple } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router";
-
+import { Link, useNavigate } from "react-router";
+import Swal from 'sweetalert2'
 
 
 const Login = () => {
 
-     const [toggleTwo, setToggleTwo] = useState(false)
+    const [toggleTwo, setToggleTwo] = useState(false)
+    const navigate = useNavigate();
+    const [error, setError] = useState('')
+    
+
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        const from = e.target
+        const email = from.email.value;
+        const password = from.password.value;
+
+        const fromData = { email, password }
+
+        try {
+            const res = await axios.post("http://localhost:5000/api/login", fromData);
+            console.log(res)
+
+            if (res.data.status == true) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${res.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/')
+            }else{
+                setError(res.data.message)
+                
+            }
+
+
+
+        } catch (error) {
+            console.log(error.message)
+        }
+
+    }
+
 
     return (
         <div className="relative">
@@ -27,14 +68,16 @@ const Login = () => {
                         <img src="../../../src/assets/Ellipse 21.png" className="absolute -right-52 -z-10 top-0" alt="" />
 
                         {/* Form */}
-                        <form className="space-y-7">
+                        <form className="space-y-7" onSubmit={handleLogin}>
                             <div className="relative">
                                 <FaEnvelope className="absolute left-3 top-3 text-[#888888]" />
                                 <input
                                     type="email"
                                     placeholder="Email Address"
+                                    name="email"
                                     className="w-full pl-10 pr-4 py-2 rounded-full border  border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
                                 />
+                                 <p className="text-red-400 ">{error.includes('Email is incorrect!') === true && error}</p>
                             </div>
 
                             <div className="relative">
@@ -49,6 +92,7 @@ const Login = () => {
                                     name="password"
                                     className="w-full pl-10 pr-4 py-2 rounded-full border border-[#cccccc20] text-white placeholder-[#4B4B4B] focus:outline-none focus:ring-2 focus:ring-green-400"
                                 />
+                                <p className="text-red-400 ">{error.includes('Password is incorrect!') === true && error}</p>
                             </div>
 
 
@@ -56,7 +100,7 @@ const Login = () => {
                                 type="submit"
                                 className="w-full bg-primary-color font-semibold hover:bg-green-600 transition text-white py-2 rounded-full hover:cursor-pointer"
                             >
-                                Create Account
+                                Login
                             </button>
                         </form>
                         {/* Social icons */}

@@ -15,13 +15,13 @@ const NavBar = () => {
     </>
 
     return (
-        <div className={`${pathname == '/' ? 'bg-[url(/bg-2.png)]' : 'bg-bg-color py-3'} bg-no-repeat bg-cover relative`}>
-            <img src="../../src/assets/Ellipse 5.png" className='absolute top-0 left-0' alt="" />
+        <div className={`${pathname == '/' ? 'bg-[url(/bg-2.png)]' : 'bg-bg-color z-20 py-3'} bg-no-repeat bg-cover relative`}>
+            <img src="../../src/assets/Ellipse 5.png" className='absolute top-0 z-20 left-0' alt="" />
             <div className='lg: max-w-[1400px] mx-auto px-5 py-5 lg:px-0'>
                 <div className={`${ pathname == '/' ? 'border-b-1': 'border-0'} navbar  text-white shadow-sm  border-[#cccccc20] pb-8`}>
                     <div className="navbar-start">
 
-                        <Link className=" hover: indent-0.5  text-xl" to={"/"}><img src={logo} alt="" /></Link>
+                        <Link className=" hover: indent-0.5  text-xl z-50" to={"/"}><img src={logo} alt="" /></Link>
                         <button className='category-btn hidden lg:block ml-5'>Categories</button>
                     </div>
                     <div className="navbar-center w-1/4  bg-[#1f2b19] hidden p-2 rounded  lg:flex">
