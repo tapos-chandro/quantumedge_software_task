@@ -1,9 +1,13 @@
+import AllJob from "./AllJob";
 
 
 const Home = () => {
     return (
-        <div>
-            <h1>This is home</h1>
+        <div className="max-w-[1400px] mx-auto">
+
+            
+            <AllJob></AllJob>
+            
         </div>
     );
 };
