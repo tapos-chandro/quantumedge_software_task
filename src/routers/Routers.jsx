@@ -3,6 +3,7 @@ import Home from "../pages/Home/Home";
 import MainLayout from "../layout/MainLayout";
 import SignUp from "../pages/SignUp/SignUp";
 import Login from "../pages/Login/Login";
+import NotFound from "../pages/NotFound/NotFound";
 
 
 
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <p>Page not found 404</p>,
+    errorElement: <NotFound></NotFound>,
     children: [
         {
             path: '/',

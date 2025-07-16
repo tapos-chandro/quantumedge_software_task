@@ -31,7 +31,7 @@ const SignUp = () => {
         const formData = { email, password, confirmPassword, username, first_name };
 
         try {
-            const res = await axios.post("http://localhost:5000/api/signup", formData);
+            const res = await axios.post("https://quantumedge-software-task-server.vercel.app/api/signup", formData);
 
 
             console.log(res)

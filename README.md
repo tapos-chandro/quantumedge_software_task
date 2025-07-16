@@ -1,12 +1,44 @@
-# React + Vite
+# Frontend Developer Intern Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **[Live Project](https://stirring-cranachan-a684e4.netlify.app/)**   
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Project Overview
 
-## Expanding the ESLint configuration
+This project is a 3-page frontend application built for a frontend intern assignment. It replicates a given Figma design and integrates real API endpoints for user authentication and job listings.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧩 Features
+
+- 🔐 **Login Page** — Authenticates users via API  
+- 📝 **Registration Page** — Registers new users using API  
+- 💼 **Job Listings Page** — Displays job data fetched from external API  
+- 💬 User feedback using **SweetAlert2**  
+- 📱 Fully responsive design using **Tailwind CSS**  
+- 🔄 CORS handled via a custom **Express proxy server**
+
+---
+
+## 🧪 Tech Stack
+
+- **React** (Vite)
+- **Tailwind CSS**
+- **Axios** for API handling
+- **React Router DOM**
+- **SweetAlert2** for notifications
+- **Express.js** for proxy server
+
+---
+
+## 📡 API Endpoints Used
+
+| Purpose        | Endpoint (via Proxy)               |
+|----------------|-------------------------------------|
+| Login          | `POST /api/auth/login`              |
+| Registration   | `POST /api/auth/registration`       |
+| Job Listings   | `GET /api/browse/pro-jobs`          |
+
+> These are proxied to the actual API using Express.js to avoid CORS issues.
+

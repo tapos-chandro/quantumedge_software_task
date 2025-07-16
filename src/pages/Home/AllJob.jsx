@@ -8,7 +8,7 @@ const AllJob = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/jobs')
+        fetch('https://quantumedge-software-task-server.vercel.app/api/jobs')
             .then(res => res.json())
             .then(data => {
             

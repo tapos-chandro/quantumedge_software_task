@@ -9,7 +9,7 @@ const NavBar = () => {
 
     const { pathname } = useLocation()
     const navLinks = <>
-        <NavLink to="/seller" className='uppercase px-5'>Become a seller</NavLink>
+        <NavLink to="/" className='uppercase px-5'>Become a seller</NavLink>
         <NavLink to="/login" className='uppercase px-5'>Login</NavLink>
         <NavLink to="/signup" className="uppercase px-5 btn primary-btn"><button className='text-white outline-0 border-0 hover:cursor-pointer'>Registration</button></NavLink>
     </>
